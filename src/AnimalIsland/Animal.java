@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import static AnimalIsland.AnimalType.*;
 
 public abstract class Animal {
     private Gender gender;
@@ -61,6 +60,30 @@ public abstract class Animal {
                             break;
                         case Wolf:
                             childrens.add(new Predator.Wolf(sex, this.x, this.y));
+                            break;
+                        case Boa:
+                            childrens.add(new Predator.Boa(sex, this.x, this.y));
+                            break;
+                        case Bear:
+                            childrens.add(new Predator.Bear(sex, this.x, this.y));
+                            break;
+                        case Eagle  :
+                            childrens.add(new Predator.Eagle(sex, this.x, this.y));
+                            break;
+                        case Fox  :
+                            childrens.add(new Predator.Fox(sex, this.x, this.y));
+                            break;
+                        case Deer:
+                            childrens.add(new Herbivore.Deer(sex, this.x, this.y));
+                            break;
+                        case Rabbit:
+                            childrens.add(new Herbivore.Rabbit(sex, this.x, this.y));
+                            break;
+                        case Mouse:
+                            childrens.add(new Herbivore.Rabbit(sex, this.x, this.y));
+                            break;
+                        case Goat:
+                            childrens.add(new Herbivore.Goat(sex, this.x, this.y));
                             break;
                     }
             }
@@ -163,5 +186,22 @@ public abstract class Animal {
         return this.getClass().getSimpleName();
     }
 
-    public abstract void findPray(Set<Animal> animals, AnimalType[] orderToEatAnimals);
+    public static void setEaten(Map<AnimalType, Integer> eaten) {
+        Animal.eaten = eaten;
+    }
+
+    public static Map<AnimalType, Integer> getEaten() {
+        return eaten;
+    }
+
+    public int findPray(Set<Animal> animals, AnimalType[] orderToEatAnimals) {
+        for (int i = 0; i < orderToEatAnimals.length - 1; i++) {
+            for (Animal animal : animals) {
+                if (orderToEatAnimals[i].equals(animal.getAnimalTypeName()))
+                    return animal.getWeight();
+            }
+        }
+        return 0;
+    }
+
 }

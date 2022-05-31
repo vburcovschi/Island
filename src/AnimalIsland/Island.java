@@ -5,6 +5,7 @@ import java.util.*;
 import static AnimalIsland.AnimalType.*;
 import static AnimalIsland.Properties.*;
 import static AnimalIsland.Service.*;
+import static AnimalIsland.Start.*;
 
 public class Island {
     private int width;
@@ -29,7 +30,7 @@ public class Island {
         return cells;
     }
 
-    public static void populateIsland(Island myIsland) {
+    public static void populateIsland() {
         int width = myIsland.getWidth();
         int height = myIsland.getHeight();
         for (int i = 0; i < height; i++) {
@@ -42,8 +43,16 @@ public class Island {
     }
 
     private static void populateAnimalsOnCell(Cell cell, int x, int y) {
-        generateAnimals(cell, Horse, MAX_HORSES_ON_CELL, x, y);
         generateAnimals(cell, Wolf, MAX_WOLF_ON_CELL, x, y);
+        generateAnimals(cell, Boa, MAX_BOA_ON_CELL, x, y);
+        generateAnimals(cell, Fox, MAX_FOX_ON_CELL, x, y);
+        generateAnimals(cell, Bear, MAX_BEAR_ON_CELL, x, y);
+        generateAnimals(cell, Eagle, MAX_EAGLE_ON_CELL, x, y);
+        generateAnimals(cell, Horse, MAX_HORSES_ON_CELL, x, y);
+        generateAnimals(cell, Deer, MAX_DEER_ON_CELL, x, y);
+        generateAnimals(cell, Rabbit, MAX_RABBIT_ON_CELL, x, y);
+        generateAnimals(cell, Mouse, MAX_MOUSE_ON_CELL, x, y);
+        generateAnimals(cell, Goat, MAX_GOAT_ON_CELL, x, y);
     }
 
    private static void generateAnimals(Cell cell, AnimalType animalType, int quantity, int x, int y) {
@@ -60,36 +69,36 @@ public class Island {
                 case Horse:
                     cell.getAnimals().add(new Herbivore.Horse(sex, x, y));
                     break;
+                case Boa:
+                    cell.getAnimals().add(new Predator.Boa(sex, x, y));
+                    break;
                 case Wolf:
                     cell.getAnimals().add(new Predator.Wolf(sex, x, y));
+                    break;
+                case Fox:
+                    cell.getAnimals().add(new Predator.Fox(sex, x, y));
+                    break;
+                case Bear:
+                    cell.getAnimals().add(new Predator.Bear(sex, x, y));
+                    break;
+                case Eagle:
+                    cell.getAnimals().add(new Predator.Eagle(sex, x, y));
+                    break;
+                case Deer:
+                    cell.getAnimals().add(new Herbivore.Deer(sex, x, y));
+                    break;
+                case Rabbit:
+                    cell.getAnimals().add(new Herbivore.Rabbit(sex, x, y));
+                    break;
+                case Mouse:
+                    cell.getAnimals().add(new Herbivore.Mouse(sex, x, y));
+                    break;
+                case Goat:
+                    cell.getAnimals().add(new Herbivore.Goat(sex, x, y));
                     break;
             }
         }
     }
-
-  /*   public static void generateAnimalsByPairing(Cell cell, AnimalType animalType, int quantity) {
-        Random rnd = new Random();
-        boolean gender;
-        for (int i = 0; i < quantity; i++) {
-            gender = rnd.nextBoolean();
-            switch (animalType) {
-                case Horse:
-                    int horse_child_count = rnd.nextInt(HORSE_MAX_CHILDREN);
-                    for (int j = 0; j < horse_child_count; j++) {
-                        Gender sex = (gender) ? Gender.MALE : Gender.FEMALE;
-                        cell.animals.add(new Herbivore.Horse(i, sex, cell.getX(), cell.getY()));
-                    }
-                    break;
-                case Wolf:
-                    int wolf_child_count = rnd.nextInt(WOLF_MAX_CHILDREN);
-                    for (int j = 0; j < wolf_child_count; j++) {
-                        Gender sex = (gender) ? Gender.MALE : Gender.FEMALE;
-                        cell.animals.add(new Predator.Wolf(i, sex, cell.getX(), cell.getX()));
-                    }
-                    break;
-            }
-        }
-    }*/
 
     @Override
     public String toString() {
@@ -103,11 +112,3 @@ public class Island {
         return "";
     }
 }
-
-
-
-//System.out.print("[" + cell.getX() + "," + cell.getY() + "](" + cell.animals.size() + ")  {"+calcMaxTypeAnimal(cell)+"} ");
-/*            Iterator<Animal> itA = cell.animals.iterator();
-            for (Iterator<Animal> iter = itA; iter.hasNext(); ) {
-                Animal a = iter.next();
-                System.out.print(calcMaxTypeAnimal(cell)+" "); */ //getClass().getSimpleName()+

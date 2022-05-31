@@ -2,39 +2,34 @@ package AnimalIsland;
 
 
 import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.TimeUnit;
 
 import static AnimalIsland.Island.*;
 import static AnimalIsland.Properties.*;
 import static AnimalIsland.Service.*;
-import static AnimalIsland.Statistcs.*;
+import static AnimalIsland.Statistics.*;
 
 
 public class Start {
     public static int iter;
+    public static Island myIsland = new Island(ISLAND_WIDTH, ISLAND_HEIGHT, new Cell[ISLAND_HEIGHT][ISLAND_WIDTH]);
     public static void main(String[] args) throws InterruptedException {
-        Island myIsland = new Island(ISLAND_WIDTH, ISLAND_HEIGHT, new Cell[ISLAND_HEIGHT][ISLAND_WIDTH]);
-/*        Herbivore.Horse horse = new Horse(1, Sex.MALE);
-        System.out.println(horse.toString());
-        Predator.Wolf wolf = new Wolf(1,Sex.FEMALE);
-        System.out.println(wolf.toString());
-        System.out.println("Wolf speed is: "+wolf.getSpeed());
-        System.out.println((Animal)wolf instanceof Predator);*/
-//        System.out.println("\uD83D\uDC3A");
-        catchAnimal();
-/*        populateIsland(myIsland);
+        populateIsland();
+        iter = 0;
+        showStatisctic();
         System.out.println(myIsland);
-        iter = 1;
-        while (checkAnimalsAlive(myIsland)){
-            showStatisctic(myIsland);
-            moveAnimalsBulk(myIsland);
+        iter++;
+        while (checkAnimalsAlive()){
+            moveAnimalsBulk();
+            reproducingAnimals();
+            eatAnimalBulk();
+            showStatisctic();
             System.out.println(myIsland);
-            reproducingAnimals(myIsland);
             iter++;
             Thread.sleep(500);
         }
-        showStatisctic(myIsland);
-        System.out.println(myIsland);
-        System.out.println("Game Over!");*/
+        System.out.println("Game Over!");
     }
 
 
