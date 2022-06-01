@@ -13,6 +13,7 @@ import static AnimalIsland.Statistics.*;
 
 public class Start {
     public static int iter;
+    public static boolean exitCondition;
     public static Island myIsland = new Island(ISLAND_WIDTH, ISLAND_HEIGHT, new Cell[ISLAND_HEIGHT][ISLAND_WIDTH]);
     public static void main(String[] args) throws InterruptedException {
         populateIsland();
@@ -20,14 +21,12 @@ public class Start {
         showStatisctic();
         System.out.println(myIsland);
         iter++;
-        while (checkAnimalsAlive()){
-            moveAnimalsBulk();
-            reproducingAnimals();
-            eatAnimalBulk();
-            showStatisctic();
-            System.out.println(myIsland);
-            iter++;
-            Thread.sleep(500);
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        exitCondition = checkAnimalsAlive();
+        while (exitCondition){
+            executorService.execute(new Service());
+            executorService.execute(new Statistics());
+            executorService.shutdown();
         }
         System.out.println("Game Over!");
     }

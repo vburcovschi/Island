@@ -90,5 +90,13 @@ public  class Statistics implements Runnable{
     @Override
     public void run() {
         showStatisctic();
+        System.out.println(myIsland);
+        iter++;
+        exitCondition = checkAnimalsAlive();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

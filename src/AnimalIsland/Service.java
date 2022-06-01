@@ -5,6 +5,7 @@ import java.util.*;
 import static AnimalIsland.AnimalType.*;
 import static AnimalIsland.Direction.*;
 import static AnimalIsland.Properties.*;
+import static AnimalIsland.Start.exitCondition;
 import static AnimalIsland.Start.myIsland;
 
 public class Service implements Runnable{
@@ -251,6 +252,15 @@ public class Service implements Runnable{
     @Override
     public void run() {
         moveAnimalsBulk();
+        exitCondition = checkAnimalsAlive();
         reproducingAnimals();
+        exitCondition = checkAnimalsAlive();
+        eatAnimalBulk();
+        exitCondition = checkAnimalsAlive();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
