@@ -6,7 +6,9 @@ import static AnimalIsland.AnimalType.*;
 
 public class Properties {
     protected static final int ISLAND_WIDTH = 85;
-    protected static final int ISLAND_HEIGHT = 25;
+    protected static final int ISLAND_HEIGHT = 10;
+    protected static final int INITIAL_DELAY = 1;
+    protected static final int CYCLE_PERIOD = 3;
 
     protected static final int WOLF_WEIGHT = 50;
     protected static final int WOLF_SPEED = 3;

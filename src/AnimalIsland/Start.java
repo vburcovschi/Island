@@ -15,20 +15,13 @@ public class Start {
     public static int iter;
     public static boolean exitCondition;
     public static Island myIsland = new Island(ISLAND_WIDTH, ISLAND_HEIGHT, new Cell[ISLAND_HEIGHT][ISLAND_WIDTH]);
-    public static void main(String[] args) throws InterruptedException {
+    public static ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
+    public static void main(String[] args) {
         populateIsland();
         iter = 0;
         showStatisctic();
-        System.out.println(myIsland);
         iter++;
-        ExecutorService executorService = Executors.newFixedThreadPool(3);
-        exitCondition = checkAnimalsAlive();
-        while (exitCondition){
-            executorService.execute(new Service());
-            executorService.execute(new Statistics());
-            executorService.shutdown();
-        }
-        System.out.println("Game Over!");
+        scheduledExecutorService.scheduleAtFixedRate(new Service(),INITIAL_DELAY,CYCLE_PERIOD,TimeUnit.MILLISECONDS);
     }
 
 

@@ -6,7 +6,7 @@ import static AnimalIsland.AnimalType.*;
 import static AnimalIsland.Service.*;
 import static AnimalIsland.Start.*;
 
-public  class Statistics implements Runnable{
+public  class Statistics{
     public static Map<AnimalType, Integer> doCalculationsAliveAnimals(){
         Map<AnimalType, Integer> animalCounter = new HashMap<>();
         Set<Animal> animals;
@@ -85,18 +85,7 @@ public  class Statistics implements Runnable{
         System.out.println();
         System.out.format("Step: %d     Wolf burn/died: %d/%d  Boa burn/died: %d/%d  Eagle burn/died: %d/%d  Fox burn/died: %d/%d  Bear burn/died: %d/%d %n",iter,wolfAliveCount,wolfDiedCount,boaAliveCount,boaDiedCount,eagleAliveCount,eagleDiedCount,foxAliveCount,foxDiedCount,bearAliveCount,bearDiedCount);
         System.out.format("Horse burn/died: %d/%d  Deer burn/died: %d/%d  Rabbit burn/died: %d/%d  Mouse burn/died: %d/%d  Goat burn/died: %d/%d %n",horseAliveCount,horseDiedCount,deerAliveCount,deerDiedCount,rabbitAliveCount,rabbitDiedCount,mouseAliveCount,mouseDiedCount,goatAliveCount,goatDiedCount);
+        System.out.println(myIsland);
     }
 
-    @Override
-    public void run() {
-        showStatisctic();
-        System.out.println(myIsland);
-        iter++;
-        exitCondition = checkAnimalsAlive();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 }

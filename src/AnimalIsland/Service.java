@@ -5,8 +5,8 @@ import java.util.*;
 import static AnimalIsland.AnimalType.*;
 import static AnimalIsland.Direction.*;
 import static AnimalIsland.Properties.*;
-import static AnimalIsland.Start.exitCondition;
-import static AnimalIsland.Start.myIsland;
+import static AnimalIsland.Start.*;
+import static AnimalIsland.Statistics.showStatisctic;
 
 public class Service implements Runnable{
     public static Set<Animal> died = new HashSet<>();
@@ -251,16 +251,15 @@ public class Service implements Runnable{
 
     @Override
     public void run() {
+        showStatisctic();
+        iter++;
         moveAnimalsBulk();
-        exitCondition = checkAnimalsAlive();
         reproducingAnimals();
-        exitCondition = checkAnimalsAlive();
         eatAnimalBulk();
-        exitCondition = checkAnimalsAlive();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if (!checkAnimalsAlive()) {
+            showStatisctic();
+            scheduledExecutorService.shutdown();
+            System.out.println("Game Over");
         }
     }
 }
